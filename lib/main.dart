@@ -8,43 +8,44 @@ class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _MyAppState(); // _  turns to the private class
+    return _MyAppState(); //  The leading "_" marks a class, property or method as private, which means that you can only use it in the same library. Typically, a file is treated as a separate library.
   }
 }
 
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0; // private property
 
-  void _answerQuestion() {
-    setState(() {
-      _questionIndex = _questionIndex + 1;
-    });
+  final questions = const [
+    {
+      'questionText': 'What is your favorite color?',
+      'answers': ['Black', 'Red', 'Green', 'White']
+    },
+    {
+      'questionText': 'What is your favorite animal?',
+      'answers': ['Dog', 'Cat', 'Bird', 'Rabitt']
+    },
+    {
+      'questionText': 'What is your favorite song?',
+      'answers': [
+        'In the End',
+        'Bring me to Life',
+        'Lose Yourself',
+        'Remember the Name'
+      ]
+    },
+  ];
 
-    print(_questionIndex);
+  void _answerQuestion() {
+    if (_questionIndex < questions.length) {
+      setState(() {
+        _questionIndex = _questionIndex + 1;
+      });
+      print(_questionIndex);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      {
-        'questionText': 'What is your favorite color?',
-        'answers': ['Black', 'Red', 'Green', 'White']
-      },
-      {
-        'questionText': 'What is your favorite animal?',
-        'answers': ['Dog', 'Cat', 'Bird', 'Rabitt']
-      },
-      {
-        'questionText': 'What is your favorite song?',
-        'answers': [
-          'In the End',
-          'Bring me to Life',
-          'Lose Yourself',
-          'Remember the Name'
-        ]
-      },
-    ];
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
