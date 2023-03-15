@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  Widget build(BuildContext context)
+  Widget build(BuildContext context) {
     var questions = [
       {
         'questionText': 'What is your favorite color?',
@@ -51,11 +51,12 @@ class _MyAppState extends State<MyApp> {
           title: Text('My First Flutter App'),
         ),
         body: Column(
-          children: <Widget>[
-            Question(questions[_questionIndex]),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
+          children: [
+            Question(questions[_questionIndex]['questionText']),
+            ...(questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) {
+              return Answer(_answerQuestion, answer);
+            }).toList()
           ],
         ),
       ),
